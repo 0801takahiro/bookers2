@@ -1,8 +1,14 @@
 <p id="notice"></p>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
 <div class="container px-5 px-sm-0">
  <div class="row">
 
-<%= render 'users/info', user: @user %>
+<%= render 'books/info', user: @user %>
 
 
 <div class="col-md-8 offset-md-1">
@@ -13,7 +19,7 @@
      <tr>
        <td>
          <img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg"><br>
-            <%= @user.name %>
+            <%= @book.user.name %>
         </a>
        </td>
        <td>
@@ -22,6 +28,10 @@
        <td>
          <%= @book.body %>
        </td>
+       <% if @book.user == current_user %>
+        <td><%= link_to "Edit", edit_book_path(@book), "class" =>"btn btn-sm btn-success" %></td>
+        <td><%= link_to "Destroy", books_path, method: :delete, "data-confirm" => "本当に削除しますか？", "class" => "btn btn-sm btn-danger" %></td>
+       <% end %>
       </tr>
     </tbody>
 

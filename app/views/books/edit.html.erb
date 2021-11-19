@@ -1,25 +1,31 @@
 <%= flash[:thumb] %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
  <p id="notice"></p>
         <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
   		<h1>Editing Book</h1>
+   <%= form_with model:@book, local:true do |f| %>
+   <div class="form-group">
+       <%= f.label :Title %><br />
+       <%= f.text_field :title, class:'form-control introduction' %>
+   </div>
+   <div class="form-group">
+       <%= f.label :Opinion %><br />
+       <%= f.text_area :body, class:'form-control introduction' %>
+   </div>
+   <div class="form-group">
+          <%= f.submit 'Update Book', class:'btn btn-success' %>
+   </div>
 
-  		<form action="/books/28398" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch"><input type="hidden" name="authenticity_token" value="zUTnxKWz8yK7r+4xWmbCBEOLpDhAGy/zQeY7f1Tbt53OXhnN6TVeWfN7soIcb0/29S9MHsRSXS5o/kgclFgROg==">
-  <div class="form-group">
-    <label for="book_title">Title</label>
-    <input class="form-control book_title" type="text" value="test" name="book[title]" id="book_title">
-  </div>
-  <div class="form-group">
-    <label for="book_opinion">Opinion</label>
-    <textarea class="form-control book_body" name="book[body]" id="book_body">aaa</textarea>
-  </div>
-  <div class="form-group">
-    <input type="submit" name="commit" value="Update Book" class="btn btn-success" data-disable-with="Update Book">
-  </div>
-</form>
-  		<a class="book_28398" href="/books/28398">Show</a> |
-  		<a class="back" href="/books">Back</a>
+<% end %>
+  		<%= link_to "Show", book_path(@book) %> |
+  		<%= link_to "Back", books_path %>
   </div>
 </div>
       </div></main>

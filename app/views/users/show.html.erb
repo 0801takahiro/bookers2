@@ -3,7 +3,7 @@
  <div class="row">
 
 
-<%= render 'users/info', user: @user, book: @book %>
+<%= render 'books/info', user: @user %>
 
 <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
@@ -19,8 +19,6 @@
   <% @books.each do |book| %>
   <tbody>
    <td>
-    <%= book.user.name %>
-
    </td>
     <td><%= link_to book.title,book_path(book.id) %></td>
    <td>
